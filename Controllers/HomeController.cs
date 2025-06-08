@@ -56,9 +56,12 @@ namespace MvcTodoApp.Controllers
         // <param name = "newTitle">العنوان الجديد</param>
         [HttpPost]
         public IActionResult EditTask(int id, string newTitle){
-            // TODO: ابحث عن المهمة باستخدام id
-           // TODO:  تأكد من أن المهمة موجودة و أن netTitle غير فارغ
-           // TODO: عدل عنوان المهمة
+            var task = tasks.FirstOrDefault(t => t.Id == id);
+            if(task != null && ! string.IsNullOrWhiteSpace(newTitle))
+            {
+                task.Title = newTitle;
+            }
+            return RedirectToAction("Index");
         }
     }
 }
